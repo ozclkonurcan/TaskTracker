@@ -1,0 +1,23 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: benim_db
+    environment:
+      - POSTGRES_PASSWORD=sifre123
+    ports:
+      - "5433:5432"
+    volumes:
+      - benim_volume:/var/lib/postgresql/data
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskTrackerDb;Username=postgres;Password=sifre123
+
+volumes:
+  benim_volume:
