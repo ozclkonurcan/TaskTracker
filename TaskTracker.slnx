@@ -5,6 +5,10 @@
     <File Path="Dockerfile" />
     <File Path="README.md" />
   </Folder>
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path="ci.yml" />
+  </Folder>
   <Project Path="TaskTracker.Application/TaskTracker.Application.csproj" />
   <Project Path="TaskTracker.Domain/TaskTracker.Domain.csproj" Id="917b56c5-32bd-4825-b1d6-125502860faa" />
   <Project Path="TaskTracker.Infrastructure/TaskTracker.Infrastructure.csproj" Id="e60d20d3-7116-4c96-8806-b875b67ff31a" />
