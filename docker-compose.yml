@@ -9,15 +9,21 @@ services:
     volumes:
       - benim_volume:/var/lib/postgresql/data
 
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
   api:
     build: .
     ports:
       - "8080:8080"
     depends_on:
       - db
+      - redis
     environment:
-    - ASPNETCORE_ENVIRONMENT=Development
-    - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskTrackerDb;Username=postgres;Password=sifre123
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TaskTrackerDb;Username=postgres;Password=sifre123
 
 volumes:
   benim_volume:

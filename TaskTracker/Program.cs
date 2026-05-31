@@ -64,7 +64,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<TaskRepository>();
+builder.Services.AddScoped<ITaskRepository, CachedTaskRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -74,6 +75,11 @@ builder.Services.AddCors(options =>
 			  .AllowAnyMethod()
 			  .AllowAnyHeader();
 	});
+});
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+	options.Configuration = "redis:6379";
 });
 
 var app = builder.Build();
