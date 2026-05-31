@@ -5,7 +5,11 @@ function TaskList() {
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/tasks')
+    fetch('http://localhost:8080/api/tasks', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
       .then(res => res.json())
       .then(data => setTasks(data))
   }, [])
@@ -16,6 +20,9 @@ function TaskList() {
 
   const handleDelete = (id) => {
     fetch(`http://localhost:8080/api/tasks/${id}`, {
+        headers: {
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
+  },
       method: 'DELETE'
     })
     .then(() => {
@@ -26,8 +33,9 @@ function TaskList() {
   const handleToggle = (task) => {
     const updated = { ...task, isCompleted: !task.isCompleted }
     fetch(`http://localhost:8080/api/tasks/${task.id}`, {
+      
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${localStorage.getItem('token')}` },
       body: JSON.stringify(updated)
     })
     .then(() => {
