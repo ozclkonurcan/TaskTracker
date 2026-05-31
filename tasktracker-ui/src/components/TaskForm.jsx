@@ -21,18 +21,26 @@ function TaskForm({ onTaskAdded }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
+    <form onSubmit={handleSubmit} className="flex gap-2 mb-4">
+      <input
         value={title}
         onChange={e => setTitle(e.target.value)}
         placeholder="Görev adı"
+        className="border rounded px-3 py-2 flex-1 text-sm"
+        required
       />
-      <input 
+      <input
         value={description}
         onChange={e => setDescription(e.target.value)}
         placeholder="Açıklama"
+        className="border rounded px-3 py-2 flex-1 text-sm"
       />
-      <button type="submit">Ekle</button>
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 rounded text-sm hover:bg-blue-600"
+      >
+        Ekle
+      </button>
     </form>
   )
 }
